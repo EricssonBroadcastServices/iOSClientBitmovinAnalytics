@@ -1,0 +1,48 @@
+// SPDX-FileCopyrightText: 2026 Red Bee Media Ltd <https://www.redbeemedia.com/\>
+//
+// SPDX-License-Identifier: MIT
+
+import Foundation
+
+enum AnalyticsEvent: String {
+    case deviceInfo = "Device.Info"
+    case adBreakFinished = "AdBreakFinished"
+    case adBreakStarted = "AdBreakStarted"
+    case adError = "AdError"
+    case adFinished = "AdFinished"
+    case adSkipped = "AdSkipped"
+    case adStarted = "AdStarted"
+    case airplayChanged = "AirplayChanged"
+    case audioChanged = "AudioChanged"
+    case castStart = "CastStart"
+    case castStarted = "CastStarted"
+    case castStopped = "CastStopped"
+    case dvrWindowExceeded = "DVRWindowExceeded"
+    case destroy = "Destroy"
+    case durationChanged = "DurationChanged"
+    case playerError = "Error"
+    case muted = "Muted"
+    case paused = "Paused"
+    case play = "Play"
+    case playbackFinished = "PlaybackFinished"
+    case playbackSpeedChanged = "PlaybackSpeedChanged"
+    case playing = "Playing"
+    case ready = "Ready"
+    case seek = "Seek"
+    case seeked = "Seeked"
+    case sourceLoaded = "SourceLoaded"
+    case stallEnded = "StallEnded"
+    case stallStarted = "StallStarted"
+    case subtitleDisabled = "SubtitleDisabled"
+    case subtitleEnabled = "SubtitleEnabled"
+    case timeChanged = "TimeChanged"
+    case timeShifted = "TimeShifted"
+    case unmuted = "Unmuted"
+    case videoPlaybackQualityChanged = "VideoPlaybackQualityChanged"
+    case warning = "Warning"
+    case drmLicenseAdded = "DrmLicenseAdded"
+    case programChanged = "Playback.ProgramChanged"
+    case connectionTypeChange = "Playback.ConnectionTypeChange"
+    case appBackgrounded = "Playback.AppBackgrounded"
+    case appResumed = "Playback.AppResumed"
+}
