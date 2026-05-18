@@ -352,7 +352,8 @@ extension BitmovinAnalyticsAdapter {
             cdnVendor: "unknown",
             analyticsPostInterval: Int(analytics.configuration.postInterval),
             analyticsBucket: Int(analytics.configuration.analyticsBucket),
-            analyticsTag: analytics.configuration.analyticsTag
+            analyticsTag: analytics.configuration.analyticsTag,
+            sdkVersion: PackageInfo.sdkVersion
         )
     }
 

@@ -7,4 +7,5 @@ import Foundation
 enum AnalyticsKeys {
     static let eventType = "EventType"
     static let timestamp = "Timestamp"
+    static let playerTechnology = "PlayerTechnology"
 }

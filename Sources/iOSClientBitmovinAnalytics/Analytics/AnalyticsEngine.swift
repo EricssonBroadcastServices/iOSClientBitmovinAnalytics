@@ -84,7 +84,8 @@ actor AnalyticsEngine: AnalyticsEngineProtocol {
     func trackEvent(_ event: AnalyticsEvent, additionalPayload: AnalyticsPayloadProtocol? = nil) async {
         var payload: [String: Any] = [
             AnalyticsKeys.eventType: event.rawValue,
-            AnalyticsKeys.timestamp: Int(Date().timeIntervalSince1970)
+            AnalyticsKeys.timestamp: Int(Date().timeIntervalSince1970),
+            AnalyticsKeys.playerTechnology: "Bitmovin",
         ]
         additionalPayload?.asDictionary
             .compactMapValuesRecursively()

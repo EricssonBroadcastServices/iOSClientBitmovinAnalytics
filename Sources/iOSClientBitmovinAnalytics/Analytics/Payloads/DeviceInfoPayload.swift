@@ -26,6 +26,7 @@ struct DeviceInfoPayload: AnalyticsPayloadProtocol {
     let analyticsPostInterval: Int
     let analyticsBucket: Int
     let analyticsTag: String
+    let sdkVersion: String
 
     var asDictionary: [String: Any?] {
         [
@@ -49,7 +50,8 @@ struct DeviceInfoPayload: AnalyticsPayloadProtocol {
             AnalyticsKeys.cdnVendor: cdnVendor,
             AnalyticsKeys.analyticsPostInterval: analyticsPostInterval,
             AnalyticsKeys.analyticsBucket: analyticsBucket,
-            AnalyticsKeys.analyticsTag: analyticsTag
+            AnalyticsKeys.analyticsTag: analyticsTag,
+            AnalyticsKeys.sdkVersion: sdkVersion
         ]
     }
 }
@@ -77,4 +79,5 @@ extension AnalyticsKeys {
     static let analyticsPostInterval = "AnalyticsPostInterval"
     static let analyticsBucket = "AnalyticsBucket"
     static let analyticsTag = "AnalyticsTag"
+    static let sdkVersion = "SdkVersion"
 }
