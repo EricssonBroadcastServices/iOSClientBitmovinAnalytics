@@ -8,7 +8,7 @@ protocol AnalyticsEngineProtocol {
     var configuration: AnalyticsConfiguration { get }
     func start() async
     func trackEvent(_ event: AnalyticsEvent, additionalPayload: AnalyticsPayloadProtocol?) async
-    func trackTimeChangedEvent() async
+    func trackTimeChangedEvent(additionalPayload: AnalyticsPayloadProtocol?) async
 }
 
 extension AnalyticsEngineProtocol {
@@ -97,11 +97,14 @@ actor AnalyticsEngine: AnalyticsEngineProtocol {
         logInfo("\(event.rawValue) event queued")
     }
 
-    func trackTimeChangedEvent() async {
-        let timeChangedPayload: [String: Any] = [
+    func trackTimeChangedEvent(additionalPayload: AnalyticsPayloadProtocol? = nil) async {
+        var timeChangedPayload: [String: Any] = [
             AnalyticsKeys.eventType: AnalyticsEvent.timeChanged.rawValue,
             AnalyticsKeys.timestamp: Int(Date().timeIntervalSince1970)
         ]
+        additionalPayload?.asDictionary
+            .compactMapValuesRecursively()
+            .forEach { timeChangedPayload[$0] = $1 }
         latestTimeChangedPayload = timeChangedPayload
         timeChangedStorage?.writePayload(timeChangedPayload, key: timeChangedPayloadKey)
     }
