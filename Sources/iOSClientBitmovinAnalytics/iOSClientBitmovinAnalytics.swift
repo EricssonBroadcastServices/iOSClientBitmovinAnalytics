@@ -60,8 +60,9 @@ public final class BitmovinAnalyticsAdapter {
 
         player.events
             .on(PlayEvent.self)
-            .sink { [weak self] _ in
-                self?.analytics.track(.play)
+            .sink { [weak self, player] _ in
+                let payload = PlaybackPositionPayload(playbackPosition: player.currentTime)
+                self?.analytics.track(.play, additionalPayload: payload)
             }
             .store(in: &cancellables)
 
@@ -144,8 +145,9 @@ public final class BitmovinAnalyticsAdapter {
 
         player.events
             .on(DestroyEvent.self)
-            .sink { [weak self] _ in
-                self?.analytics.track(.destroy)
+            .sink { [weak self, player] _ in
+                let payload = PlaybackPositionPayload(playbackPosition: player.currentTime)
+                self?.analytics.track(.destroy, additionalPayload: payload)
             }
             .store(in: &cancellables)
 
@@ -172,15 +174,17 @@ public final class BitmovinAnalyticsAdapter {
 
         player.events
             .on(PausedEvent.self)
-            .sink { [weak self] _ in
-                self?.analytics.track(.paused)
+            .sink { [weak self, player] _ in
+                let payload = PlaybackPositionPayload(playbackPosition: player.currentTime)
+                self?.analytics.track(.paused, additionalPayload: payload)
             }
             .store(in: &cancellables)
 
         player.events
             .on(PlaybackFinishedEvent.self)
-            .sink { [weak self] _ in
-                self?.analytics.track(.playbackFinished)
+            .sink { [weak self, player] _ in
+                let payload = PlaybackPositionPayload(playbackPosition: player.currentTime)
+                self?.analytics.track(.playbackFinished, additionalPayload: payload)
             }
             .store(in: &cancellables)
 
@@ -207,15 +211,17 @@ public final class BitmovinAnalyticsAdapter {
 
         player.events
             .on(SeekEvent.self)
-            .sink { [weak self] _ in
-                self?.analytics.track(.seek)
+            .sink { [weak self, player] _ in
+                let payload = PlaybackPositionPayload(playbackPosition: player.currentTime)
+                self?.analytics.track(.seek, additionalPayload: payload)
             }
             .store(in: &cancellables)
 
         player.events
             .on(SeekedEvent.self)
-            .sink { [weak self] _ in
-                self?.analytics.track(.seeked)
+            .sink { [weak self, player] _ in
+                let payload = PlaybackPositionPayload(playbackPosition: player.currentTime)
+                self?.analytics.track(.seeked, additionalPayload: payload)
             }
             .store(in: &cancellables)
 
@@ -254,9 +260,10 @@ public final class BitmovinAnalyticsAdapter {
 
         player.events
             .on(TimeChangedEvent.self)
-            .sink { [weak self] _ in
+            .sink { [weak self, player] _ in
+                let payload = PlaybackPositionPayload(playbackPosition: player.currentTime)
                 Task {
-                    await self?.analytics.trackTimeChangedEvent()
+                    await self?.analytics.trackTimeChangedEvent(additionalPayload: payload)
                 }
             }
             .store(in: &cancellables)
