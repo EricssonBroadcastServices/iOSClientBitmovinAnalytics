@@ -84,7 +84,7 @@ actor AnalyticsEngine: AnalyticsEngineProtocol {
     func trackEvent(_ event: AnalyticsEvent, additionalPayload: AnalyticsPayloadProtocol? = nil) async {
         var payload: [String: Any] = [
             AnalyticsKeys.eventType: event.rawValue,
-            AnalyticsKeys.timestamp: Int(Date().timeIntervalSince1970),
+            AnalyticsKeys.timestamp: Int(Date().millisecondsSince1970),
             AnalyticsKeys.playerTechnology: "Bitmovin",
         ]
         additionalPayload?.asDictionary
@@ -100,7 +100,7 @@ actor AnalyticsEngine: AnalyticsEngineProtocol {
     func trackTimeChangedEvent(additionalPayload: AnalyticsPayloadProtocol? = nil) async {
         var timeChangedPayload: [String: Any] = [
             AnalyticsKeys.eventType: AnalyticsEvent.timeChanged.rawValue,
-            AnalyticsKeys.timestamp: Int(Date().timeIntervalSince1970)
+            AnalyticsKeys.timestamp: Int(Date().millisecondsSince1970)
         ]
         additionalPayload?.asDictionary
             .compactMapValuesRecursively()
@@ -166,7 +166,7 @@ actor AnalyticsEngine: AnalyticsEngineProtocol {
         var body: [String: Any] = [
             "BusinessUnit": configuration.businessUnit,
             "Customer": configuration.customer,
-            "DispatchTime": Int(Date().timeIntervalSince1970),
+            "DispatchTime": Int(Date().millisecondsSince1970),
             "Payload": payloadSource.value,
             "SessionId": configuration.sessionID
         ]
